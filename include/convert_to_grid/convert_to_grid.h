@@ -1,21 +1,32 @@
+#include <ros/ros.h>
 #include <grid_map_ros/grid_map_ros.hpp>
-#include <grid_map/grid_map.hpp>
-#include "nav_msgs/OccupancyGrid.h"
-#include "GRIDMAP2D_GRIDMAP2D_H_"
-#include <GridMapRosConverter.hpp>
-#include <GridMapCvConverter.hpp>
+#include "grid_map_ros/GridMapRosConverter.hpp"
+#include <grid_map_msgs/GridMap.h>
+// #include <iostream>
 
-using namespace nav_msgs;
+#include "nav_msgs/OccupancyGrid.h"
+
+#include <grid_map_cv/GridMapCvConverter.hpp>
+
+#include <opencv2/core/core.hpp>
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/highgui/highgui.hpp>
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+using namespace grid_map;
 using namespace cv;
 
 
-class ConvertToGrid:
+class ConvertToGrid
 {
   public:
     ros::Subscriber costmap_sub;
     ros::Publisher gridmap_pub;
     ConvertToGrid();
-    void costmap_callback(const OccupancyGrid& costmap);
+    void costmap_callback(const nav_msgs::OccupancyGrid& costmap);
     GridMap map;
-    cv::Mat& image;
+    // cv::Mat& image;
 };

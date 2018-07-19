@@ -1,15 +1,23 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(wagon_rut_costmap)
 
+set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS}")
+
+
 ## Compile as C++11, supported in ROS Kinetic and newer
-# add_compile_options(-std=c++11)
+#add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
+  #grid_map
   grid_map_core
+  grid_map_ros
   grid_map_costmap_2d
+  grid_map_cv
+  grid_map_msgs
+  cv_bridge
   roscpp
   stage_ros
 )
@@ -104,9 +112,9 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
+  INCLUDE_DIRS include
 #  LIBRARIES wagon_rut_costmap
-#  CATKIN_DEPENDS grid_map_core grid_map_costmap_2d roscpp stage_ros
+#  CATKIN_DEPENDS grid_map_core grid_map_costmap_2d grid_map_cv roscpp stage_ros
 #  DEPENDS system_lib
 )
 
@@ -200,8 +208,7 @@ include_directories(
 # catkin_add_nosetests(test)
 
 add_executable(wagon_rut_costmap src/convert_to_grid.cpp)
-target_link_libraries(wagon_rut_costmap ${catkin_LIBRARIES})
+target_link_libraries(wagon_rut_costmap ${catkin_LIBRARIES} ${OpenCV_LIBS})
 include_directories(include)
-set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS}")
 message( STATUS "OpenCV Include Dir: " ${OpenCV_INCLUDE_DIRS} )
-find_package(OpenCV 3.3.1 EXACT REQUIRED)
+#find_package(OpenCV 3.3.1 EXACT REQUIRED)

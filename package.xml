@@ -49,20 +49,32 @@
   <!-- Use doc_depend for packages you need only for building documentation: -->
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
-  <build_depend>grid_map</build_depend>
-  <build_depend>roscpp</build_depend>
-  <build_depend>stageros</build_depend>
-  <build_export_depend>grid_map</build_export_depend>
-  <build_export_depend>roscpp</build_export_depend>
-  <build_export_depend>stageros</build_export_depend>
-  <exec_depend>grid_map</exec_depend>
-  <exec_depend>roscpp</exec_depend>
-  <exec_depend>stageros</exec_depend>
+  <!-- <build_depend>grid_map</build_depend> -->
+  <depend>grid_map_core</depend>
+  <depend>grid_map_ros</depend>
+  <depend>grid_map_costmap_2d</depend>
+  <depend>grid_map_cv</depend>
+  <depend>cv_bridge</depend>
+  <depend>grid_map_msgs</depend>
+  <depend>roscpp</depend>
+  <depend>stageros</depend>
+  <!-- <build_export_depend>grid_map</build_export_depend> -->
+  <!-- <build_export_depend>grid_map_core</build_export_depend> -->
+  <!-- <build_export_depend>grid_map_costmap_2d</build_export_depend> -->
+  <!-- <build_export_depend>grid_map_cv</build_export_depend> -->
+  <!-- <build_export_depend>roscpp</build_export_depend> -->
+  <!-- <build_export_depend>stageros</build_export_depend> -->
+  <!-- <exec_depend>grid_map</exec_depend> -->
+   <!-- <exec_depend>grid_map_core</exec_depend> -->
+  <!-- <exec_depend>grid_map_costmap_2d</exec_depend> -->
+  <!-- <exec_depend>grid_map_cv</exec_depend> -->
+  <!-- <exec_depend>roscpp</exec_depend> -->
+  <!-- <exec_depend>stageros</exec_depend> --> -->
 
 
   <!-- The export tag contains other, unspecified, tags -->
-  <export>
+  <!-- <export> -->
     <!-- Other tools can request additional information be placed here -->
 
-  </export>
+  <!-- </export> -->
 </package>
