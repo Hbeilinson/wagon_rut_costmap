@@ -51,11 +51,11 @@ void ConvertToGrid::costmap_callback(const nav_msgs::OccupancyGrid& costmap)
   gridmap_pub.publish(message);
   cv::Mat image;
   string cost = string("costmap");
-  GridMapCvConverter::toImage<unsigned short, 1>(map, cost, CV_16UC1, image); //go look at grid map tests
+  GridMapCvConverter::toImage<unsigned short, 1>(map, cost, CV_32FC1, 0.0, 100.0, image); //go look at grid map tests
   const std::string &dispwin = "Display window";
   //namedWindow(dispwin);// Create a window for display.
   //imshow( "Display window", image);
-  imwrite("map.jpg", image);
+  imwrite("map.pgm", image);
 }
 
 int main(int argc, char **argv)
