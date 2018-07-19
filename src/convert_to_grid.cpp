@@ -1,25 +1,45 @@
-// #include <ros/ros.h>
 #include <convert_to_grid/convert_to_grid.h>
-// #include "grid_map_ros/GridMapRosConverter.hpp"
-// #include <grid_map_core/grid_map_core.hpp>
 
+//to read in parameter in constructor, use this syntax: navigatorNode.param("map_inflation_radius", mInflationRadius, 1.0);
 
-// using namespace cv;
-// using namespace grid_map;
 
 ConvertToGrid::ConvertToGrid()
 {
   ROS_INFO_STREAM("on line 12");
   ros::NodeHandle nh;
-  costmap_sub = nh.subscribe("/move_base/global_costmap/costmap", 1, &ConvertToGrid::costmap_callback, this);
+  costmap_sub = nh.subscribe("my_costmap", 1, &ConvertToGrid::costmap_callback, this);
+  update_sub = nh.subscribe("/move_base/global_costmap/costmap_updates", 1, &ConvertToGrid::convert_occupancy_grid, this);
   gridmap_pub = nh.advertise<grid_map_msgs::GridMap>("/gridmap", 1, true);
-  // gridmap_pub.advertise()
+  update_pub = nh.advertise<nav_msgs::OccupancyGrid>("my_costmap", 1, true);
   const std::vector<std::string>& layers = std::vector<std::string>{"costmap"};
   // GridMap mapIn({"layer"});
   map = GridMap(layers); //look at something in cmake lists possibly?
   // map.add("costmap");
   map.setFrameId("map");
   map.setGeometry(Length(2.0, 2.00), 0.05);
+
+}
+
+void ConvertToGrid::convert_occupancy_grid(const map_msgs::OccupancyGridUpdate& gridupdate)
+{
+  nav_msgs::OccupancyGrid ocgrid = nav_msgs::OccupancyGrid();
+  nav_msgs::MapMetaData metadata = nav_msgs::MapMetaData();
+  metadata.map_load_time.sec = 0;
+  metadata.map_load_time.nsec = 0;
+  metadata.resolution = 0.05;
+  metadata.width = gridupdate.width;
+  metadata.height = gridupdate.height;
+  metadata.origin.position.x = 0.0;
+  metadata.origin.position.y = 0.0;
+  metadata.origin.position.z = 0.0;
+  metadata.origin.orientation.x = 0.0;
+  metadata.origin.orientation.y = 0.0;
+  metadata.origin.orientation.z = 0.0;
+  metadata.origin.orientation.w = 1.0;
+  ocgrid.info = metadata;
+  ocgrid.header = gridupdate.header;
+  ocgrid.data = gridupdate.data;
+  update_pub.publish(ocgrid);
 
 }
 

@@ -5,6 +5,8 @@
 // #include <iostream>
 
 #include "nav_msgs/OccupancyGrid.h"
+#include "map_msgs/OccupancyGridUpdate.h"
+#include "nav_msgs/MapMetaData.h"
 
 #include <grid_map_cv/GridMapCvConverter.hpp>
 
@@ -25,8 +27,11 @@ class ConvertToGrid
   public:
     ros::Subscriber costmap_sub;
     ros::Publisher gridmap_pub;
+    ros::Subscriber update_sub;
+    ros::Publisher update_pub;
     ConvertToGrid();
     void costmap_callback(const nav_msgs::OccupancyGrid& costmap);
+    void convert_occupancy_grid(const map_msgs::OccupancyGridUpdate& gridupdate);
     GridMap map;
     // cv::Mat& image;
 };
