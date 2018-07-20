@@ -57,7 +57,7 @@ void ConvertToGrid::costmap_callback(const nav_msgs::OccupancyGrid& costmap)
   const std::string &dispwin = "Display window";
   //namedWindow(dispwin);// Create a window for display.
   //imshow( "Display window", image);
-  imwrite("/home/strider/catkin_ws/map.pgm", image);
+  imwrite("/home/strider/catkin_ws/src/simple_costmap_layer/world_files/even_older_map.pgm", image);
 }
 
 int main(int argc, char **argv)
