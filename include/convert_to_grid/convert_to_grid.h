@@ -33,5 +33,6 @@ class ConvertToGrid
     void costmap_callback(const nav_msgs::OccupancyGrid& costmap);
     void convert_occupancy_grid(const map_msgs::OccupancyGridUpdate& gridupdate);
     GridMap map;
+    GridMap elevation;
     // cv::Mat& image;
 };

@@ -14,6 +14,8 @@ ConvertToGrid::ConvertToGrid()
   const std::vector<std::string>& layers = std::vector<std::string>{"costmap"};
   // GridMap mapIn({"layer"});
   map = GridMap(layers); //look at something in cmake lists possibly?
+  map.add("elevation", 0.0);
+  // elevation = GridMap({"elevation"});
   // map.add("costmap");
   map.setFrameId("map");
   map.setGeometry(Length(2.0, 2.00), 0.05);
@@ -51,11 +53,11 @@ void ConvertToGrid::costmap_callback(const nav_msgs::OccupancyGrid& costmap)
   gridmap_pub.publish(message);
   cv::Mat image;
   string cost = string("costmap");
-  GridMapCvConverter::toImage<unsigned short, 1>(map, cost, CV_32FC1, 0.0, 100.0, image); //go look at grid map tests
+  GridMapCvConverter::toImage<unsigned short, 1>(map, cost, CV_16UC1, 0.0, 100.0, image); //go look at grid map tests
   const std::string &dispwin = "Display window";
   //namedWindow(dispwin);// Create a window for display.
   //imshow( "Display window", image);
-  imwrite("map.pgm", image);
+  imwrite("/home/strider/catkin_ws/map.pgm", image);
 }
 
 int main(int argc, char **argv)
