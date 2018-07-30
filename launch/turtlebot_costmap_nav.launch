@@ -80,13 +80,13 @@
   <node name="convert_to_grid" pkg="wagon_rut_costmap" type="wagon_rut_costmap" />
 
   <!--  **************** Visualisation ****************  -->
-  <!-- <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_stage)/rviz/robot_navigation.rviz"/> -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_stage)/rviz/robot_navigation.rviz"/>
 
 <!--- ****************** Teleop ************************ -->
   <node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop">
     <remap from="cmd_vel" to="cmd_vel_mux/input/teleop"/>
   </node>
 
-  <node name="save_costmap" pkg="simple_layers" type="save_costmap.py" cwd = "node"/>
+  <!-- <node name="save_costmap" pkg="simple_layers" type="save_costmap.py" cwd = "node"/> -->
 
 </launch>

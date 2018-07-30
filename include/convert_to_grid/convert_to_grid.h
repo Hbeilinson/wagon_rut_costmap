@@ -17,6 +17,9 @@
 #include <iostream>
 #include <string>
 
+// #include <image_transport/image_transport.h>
+// #include <cv_bridge/cv_bridge.h>
+
 using namespace std;
 using namespace grid_map;
 using namespace cv;
@@ -29,6 +32,7 @@ class ConvertToGrid
     ros::Publisher gridmap_pub;
     ros::Subscriber update_sub;
     ros::Publisher update_pub;
+    // image_transport::Publisher publish_image;
     ConvertToGrid();
     void costmap_callback(const nav_msgs::OccupancyGrid& costmap);
     void convert_occupancy_grid(const map_msgs::OccupancyGridUpdate& gridupdate);

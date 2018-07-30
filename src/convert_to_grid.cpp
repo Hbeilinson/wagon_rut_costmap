@@ -11,6 +11,7 @@ ConvertToGrid::ConvertToGrid()
   update_sub = nh.subscribe("/move_base/global_costmap/costmap_updates", 1, &ConvertToGrid::convert_occupancy_grid, this);
   gridmap_pub = nh.advertise<grid_map_msgs::GridMap>("/gridmap", 1, true);
   update_pub = nh.advertise<nav_msgs::OccupancyGrid>("my_costmap", 1, true);
+  // publish_image = nh.advertise("camera/image", 1);
   const std::vector<std::string>& layers = std::vector<std::string>{"costmap"};
   // GridMap mapIn({"layer"});
   map = GridMap(layers); //look at something in cmake lists possibly?
