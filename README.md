@@ -6,3 +6,5 @@ In order to use the gridmap package make sure to include the header files for ea
 
 To use the CV converter specifically, you must provide a CV encoding. The final digit in the encoding represents the number of channels. It must match the second parameter in the bracketed type. For further examples see the tests for the grid_map CV converter: https://github.com/ethz-asl/grid_map/blob/master/grid_map_cv/test/GridMapCvTest.cpp
 
+For my actual code for the wagon rut costmap, please see https://github.com/OSUrobotics/wagon_rut_costmap.
+
